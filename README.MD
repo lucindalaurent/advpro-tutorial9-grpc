@@ -28,14 +28,13 @@ Aplikasi chat, apabila memiliki banyak pengguna tentu memiliki beban traffic yan
 Implementasi bidirectional streaming harus mempertimbangkan aspek keamanan untuk melindungi data sensitif dan mencegah akses yang tidak sah. Penting untuk menerapkan mekanisme autentikasi dan otorisasi yang tepat untuk memastikan keamanan komunikasi. <br>
 
 4. What are the advantages and disadvantages of using the tokio_stream::wrappers::ReceiverStream for streaming responses in Rust gRPC services? <br>
-<br>
-Kelebihan: <br>
+Kelebihan: 
 * Kesederhanaan: Menyederhanakan proses streaming responses dengan menyediakan API yang lebih mudah digunakan.
 * Kemampuan konkurensi: Kompatibel dengan library tokio yang populer untuk asynchronous programming di Rust.
 * Backpressure: Mendukung mekanisme backpressure untuk mengontrol laju pengiriman responses.
 * Error Handling: Menyediakan mekanisme error handling yang mudah digunakan. <br>
 <br>
-Kekurangan: <br>
+Kekurangan: 
 * Overhead: Menambahkan overhead kinerja karena memerlukan layer abstraksi tambahan.
 * Kompleksitas: Implementasi internalnya lebih kompleks dibandingkan dengan menggunakan `grpc::ServerStreaming<T>` secara langsung.
 * Keterbatasan: Tidak mendukung semua fitur yang tersedia di `grpc::ServerStreaming<T>`.
@@ -83,12 +82,13 @@ Kelebihan:
 * Pengendalian Arus: Memiliki kontrol yang lebih baik atas aliran data, mencegah pengiriman yang berlebihan ke penerima. <br>
 <br>
 Kekurangan:
+
 * Kompleksitas: Memerlukan pemahaman yang lebih mendalam dan waktu yang lebih lama untuk mengimplementasikan dan memecahkan masalah.
 * Enkripsi: Sering memerlukan enkripsi TLS yang mengakibatkan overhead tambahan, terutama jika tidak diimplementasikan secara efisien.
 * Interoperabilitas: Tidak semua platform dan aplikasi mendukung HTTP/2, membatasi kemampuan untuk berinteraksi dengan sistem yang lebih tua atau yang tidak kompatibel.
 
 9. How does the request-response model of REST APIs contrast with the bidirectional streaming capabilities of gRPC in terms of real-time communication and responsiveness? <br>
-REST APIs akan memerlukan waktu lebih lama dibanding gRPC untuk real-time communication. 
+REST APIs umumnya akan memerlukan waktu lebih lama dibanding gRPC untuk real-time communication. 
 REST API mungkin kurang ideal untuk komunikasi real-time karena client tidak dapat menerima data dari server kecuali mengirimkan permintaan. Untuk mendapatkan pembaruan real-time, client harus memeriksa server secara berkala, sehingga kurang efisien dan berpotensi meningkatkan beban pada server. Dalam layanan gRPC dengan Bidirectional Streaming, client dan server dapat mengirimkan dan menerima data kapan saja. Hal ini ideal untuk komunikasi real-time karena server dapat mengirim pembaruan ke client segera setelah tersedia. Selain itu untuk REST API, tiap pengiriman request diperlukan pembuatan koneksi baru dari client ke server, sementara untuk gRPC hanya memerlukan 1 koneksi sampai semua request selesai. Hal ini membuat gRPC terasa lebih optimal untuk real-time communication dan lebih responsif dibanding REST APIs karena komunikasinya dapat berlangsung lebih cepat.
 
 10. What are the implications of the schema-based approach of gRPC, using Protocol Buffers, compared to the more flexible, schema-less nature of JSON in REST API payloads? <br>
