@@ -10,8 +10,8 @@ Autentikasi saat menggunakan layanan gRPC di Rust memastikan hanya client yang s
 * Otorisasi <br>
 Selain memastikan hanya client yang terautentikasi yang dapat mengakses layanan, kita juga perlu mengelola kontrol akses client berdasarkan peran dan izin yang ditetapkan. Biasanya kita memerlukan RBAC (Role Based Access Control), di mana peran/role yang diberikan pada pengguna menentukan izin atau akses yang dimilikinya. Kita bisa menggunakan middleware untuk memeriksa izin ini sebelum memberikan akses ke metode gRPC tertentu.
 * Enkripsi Data <br>
-Enkripsi data diperlukan untuk melindungi kerahasiaan informasi yang dikirim antara client dan server. Kita bisa mengenkripsi data menggunakan protokol seperti TLS untuk mengamankan informasi sensitif dari ancaman penyadapan, pemalsuan, atau manipulasi. <br>
-<br>
+Enkripsi data diperlukan untuk melindungi kerahasiaan informasi yang dikirim antara client dan server. Kita bisa mengenkripsi data menggunakan protokol seperti TLS untuk mengamankan informasi sensitif dari ancaman penyadapan, pemalsuan, atau manipulasi. 
+<br><br>
 gRPC menggunakan protokol HTTP2 yang stateful, di mana koneksi tetap terbuka selama stream data berlangsung. Artinya autentikasi, otorisasi, dan enkripsi data harus dilakukan untuk setiap data yang dikirimkan dalam stream. Proses berulang untuk autentikasi, otorisasi, dan enkripsi data meningkatkan keamanan secara keseluruhan. Hal ini berbeda dengan REST yang menggunakan protokol HTTP stateless. Setiap request dianggap independen sehingga autentikasi, otorisasi, dan enkripsi data hanya perlu dilakukan sekali per request. Setelah response dikirimkan, koneksi akan ditutup.
 
 3. What are the potential challenges or issues that may arise when handling bidirectional streaming in Rust gRPC, especially in scenarios like chat applications?<br>
@@ -32,8 +32,8 @@ Kelebihan:
 * Kesederhanaan: Menyederhanakan proses streaming responses dengan menyediakan API yang lebih mudah digunakan.
 * Kemampuan konkurensi: Kompatibel dengan library tokio yang populer untuk asynchronous programming di Rust.
 * Backpressure: Mendukung mekanisme backpressure untuk mengontrol laju pengiriman responses.
-* Error Handling: Menyediakan mekanisme error handling yang mudah digunakan. <br>
-<br>
+* Error Handling: Menyediakan mekanisme error handling yang mudah digunakan. 
+<br><br>
 Kekurangan: 
 * Overhead: Menambahkan overhead kinerja karena memerlukan layer abstraksi tambahan.
 * Kompleksitas: Implementasi internalnya lebih kompleks dibandingkan dengan menggunakan `grpc::ServerStreaming<T>` secara langsung.
@@ -79,8 +79,8 @@ Kelebihan:
 * Server Push: Mendukung pengiriman proaktif resource dari server ke klien, mengurangi latensi dengan menghindari permintaan tambahan, meningkatkan kecepatan pemuatan halaman.
 * Protokol Binari: Menggunakan format biner yang lebih efisien untuk komunikasi data dibanding text parsing, mempercepat proses analisis dan pengiriman data.
 * Kompresi Header: Mengurangi overhead dengan menyusutkan ukuran header, bermanfaat terutama untuk permintaan dan respons kecil.
-* Pengendalian Arus: Memiliki kontrol yang lebih baik atas aliran data, mencegah pengiriman yang berlebihan ke penerima. <br>
-<br>
+* Pengendalian Arus: Memiliki kontrol yang lebih baik atas aliran data, mencegah pengiriman yang berlebihan ke penerima. 
+<br><br>
 Kekurangan:
 
 * Kompleksitas: Memerlukan pemahaman yang lebih mendalam dan waktu yang lebih lama untuk mengimplementasikan dan memecahkan masalah.
